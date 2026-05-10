@@ -361,14 +361,16 @@ nav.scrolled {
   font-family: 'Playfair Display', serif;
   font-size: clamp(4rem, 6.5vw, 7.5rem);
   font-weight: 900;
-  line-height: .9;
+  line-height: 0.99;
   color: var(--ink);
   margin-bottom: 1.8rem
 }
 
 .hero-h1 .line {
   display: block;
-  overflow: hidden
+  overflow: hidden;
+  padding-bottom: .1em;
+  margin-bottom: -.1em;
 }
 
 .hero-h1 .line-inner {
@@ -1032,7 +1034,8 @@ nav.scrolled {
   font-size: .7rem;
   letter-spacing: .3em;
   text-transform: uppercase;
-  color: rgba(246, 82, 126, 0.9);;
+  color: rgba(246, 82, 126, 0.9);
+  ;
 }
 
 #contact {
@@ -1394,10 +1397,6 @@ footer {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background: var(--cream);
   z-index: 400;
   display: flex;
@@ -1405,13 +1404,16 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
-  transform: translateX(100%);
-  transition: transform .45s cubic-bezier(.16, 1, .3, 1);
-  pointer-events: none
+  transform: translate3d(100%, 0, 0);
+  transition: transform .5s cubic-bezier(.16, 1, .3, 1);
+  pointer-events: none;
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .mobile-menu.open {
-  transform: translateX(0);
+  transform: translate3d(0, 0, 0);
   pointer-events: all
 }
 
@@ -1647,8 +1649,15 @@ footer {
     gap: 1.5rem
   }
 
-  .about-deco {
-    display: none
+  .about-deco,
+  .hero-corner-2,
+  .hero-corner-3,
+  .hero-corner-4,
+  .hero-corner-5,
+  .contact-corner-2,
+  .contact-corner-3,
+  .contact-corner-4 {
+    display: none !important
   }
 }
 
@@ -1662,8 +1671,9 @@ footer {
   }
 
   .hero-h1 {
-    font-size: clamp(2.4rem, 12vw, 3.8rem);
-    line-height: .95
+    font-size: clamp(2.2rem, 11vw, 3.5rem);
+    line-height: .98;
+    margin-bottom: 1.5rem
   }
 
   .hero-sub {
@@ -1833,6 +1843,12 @@ footer {
   }
 
   .mobile-menu a {
-    font-size: 1.7rem
+    font-size: 1.5rem
+  }
+
+  .hs-item {
+    padding-bottom: .8rem;
+    border-bottom: 1px solid var(--border);
+    width: 100%
   }
 }

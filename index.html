@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Flare Studios — Where Ideas Ignite</title>
   <link rel="stylesheet" href="main.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      emailjs.init("qRYlUm"); // <--- ADD YOUR PUBLIC KEY HERE
+    })();
+  </script>
   <script src="main.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=DM+Sans:wght@200;300;400;500&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -15,7 +20,7 @@
   <div class="global-grid"></div>
 
   <nav id="mainNav">
-    <a href="#" class="nav-logo">FLARE<span>.</span>STUDIOS</a>
+    <a href="#index.html" class="nav-logo">FLARE<span>.</span>STUDIOS</a>
     <ul class="nav-links">
       <li><a href="#services" data-section="services">Services</a></li>
       <li><a href="#process" data-section="process">Process</a></li>
@@ -354,7 +359,7 @@
           <div id="contactForm">
             <h3 class="form-title">Send Us a Message</h3>
             <div class="f-row">
-              <div class="f-group"><label>Your Name</label><input type="text" name="name" id="f-name" placeholder="Rahul Sharma" required></div>
+              <div class="f-group"><label>Your Name</label><input type="text" name="name" id="f-name" placeholder="Rahul" required></div>
               <div class="f-group"><label>Phone</label><input type="tel" name="phone" id="f-phone" placeholder="+91 98989 89898"></div>
             </div>
             <div class="f-group"><label>Email Address</label><input type="email" name="email" id="f-email" placeholder="you@company.com" required></div>
@@ -396,7 +401,7 @@
   </section>
 
   <footer>
-    <a href="#" class="f-logo">FLARE<span>.</span>STUDIOS</a>
+    <a href="#index.html" class="f-logo">FLARE<span>.</span>STUDIOS</a>
     <div class="f-links">
       <a href="#services">Services</a>
       <a href="#process">Process</a>
