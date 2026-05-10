@@ -3,6 +3,10 @@ if (history.scrollRestoration) {
 }
 window.scrollTo(0, 0);
 
+window.addEventListener('load', () => {
+  document.body.style.opacity = '1';
+});
+
 const mainNav = document.getElementById('mainNav');
 
 window.addEventListener('scroll', () => {

@@ -30,7 +30,8 @@ body {
   font-family: 'DM Sans', sans-serif;
   background: var(--cream);
   color: var(--ink);
-  overflow-x: hidden
+  overflow-x: hidden;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 body::before {
@@ -1467,8 +1468,9 @@ footer {
   color: var(--muted);
   margin-top: 2rem
 }
-.mobile-menu-footer span{
-    color:var(--gold);
+
+.mobile-menu-footer span {
+  color: var(--gold);
 }
 
 .reveal {
