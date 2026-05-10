@@ -1476,6 +1476,9 @@ footer {
   color: var(--muted);
   margin-top: 2rem
 }
+.mobile-menu-footer span{
+    color:var(--gold);
+}
 
 .reveal {
   opacity: 0;
