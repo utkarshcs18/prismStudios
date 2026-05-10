@@ -52,45 +52,45 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal, .rl, .rr').forEach(el => ro.observe(el));
 
-function sendMsg() {
-  const btn = document.querySelector('.f-btn');
-  const btnText = btn.firstChild; // The "Send Message" text node
+// function sendMsg() {
+//   const btn = document.querySelector('.f-btn');
+//   const btnText = btn.firstChild; // The "Send Message" text node
   
-  const name = document.getElementById('f-name').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
-  const email = document.getElementById('f-email').value.trim();
-  const industry = document.getElementById('f-industry').value;
-  const msg = document.getElementById('f-msg').value.trim();
+//   const name = document.getElementById('f-name').value.trim();
+//   const phone = document.getElementById('f-phone').value.trim();
+//   const email = document.getElementById('f-email').value.trim();
+//   const industry = document.getElementById('f-industry').value;
+//   const msg = document.getElementById('f-msg').value.trim();
 
-  if (!name || !email) {
-    alert('Please fill in your name and email.');
-    return;
-  }
+//   if (!name || !email) {
+//     alert('Please fill in your name and email.');
+//     return;
+//   }
 
-  // Visual feedback
-  const originalText = btnText.textContent;
-  btn.disabled = true;
-  btnText.textContent = 'Sending... ';
+//   // Visual feedback
+//   const originalText = btnText.textContent;
+//   btn.disabled = true;
+//   btnText.textContent = 'Sending... ';
 
-  const templateParams = {
-    from_name: name,
-    from_email: email,
-    phone: phone,
-    industry: industry,
-    message: msg,
-    to_name: "Utkarsh"
-  };
+//   const templateParams = {
+//     from_name: name,
+//     from_email: email,
+//     phone: phone,
+//     industry: industry,
+//     message: msg,
+//     to_name: "Utkarsh"
+//   };
 
-  // Replace "servk7b" with your Service ID and "template_zwsc2n8" with your Template ID
-  emailjs.send("servk7b", "template_zwsc2n8", templateParams)
-    .then(function(response) {
-      console.log('SUCCESS!', response.status, response.text);
-      document.getElementById('contactForm').style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    }, function(error) {
-      console.log('FAILED...', error);
-      alert('Failed to send message. Please try again or email us directly.');
-      btn.disabled = false;
-      btnText.textContent = originalText;
-    });
-}
+//   // Replace "servk7b" with your Service ID and "template_zwsc2n8" with your Template ID
+//   emailjs.send("servk7b", "template_zwsc2n8", templateParams)
+//     .then(function(response) {
+//       console.log('SUCCESS!', response.status, response.text);
+//       document.getElementById('contactForm').style.display = 'none';
+//       document.getElementById('formSuccess').style.display = 'block';
+//     }, function(error) {
+//       console.log('FAILED...', error);
+//       alert('Failed to send message. Please try again or email us directly.');
+//       btn.disabled = false;
+//       btnText.textContent = originalText;
+//     });
+// }

@@ -318,7 +318,7 @@ nav.scrolled {
   position: relative;
   z-index: 2;
   padding: 9rem 0 5rem;
-  max-width: 700px
+  width: 100%;
 }
 
 .hero-tag {
@@ -411,10 +411,17 @@ nav.scrolled {
 
 .hero-actions {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: 2rem;
   opacity: 0;
   animation: fadeUp .8s ease forwards 1.3s
+}
+
+.hero-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .btn-primary {
@@ -468,8 +475,6 @@ nav.scrolled {
 .hero-stats {
   display: flex;
   gap: 3rem;
-  margin-top: 4rem;
-  padding-top: 3rem;
   opacity: 0;
   animation: fadeUp .8s ease forwards 1.5s
 }
@@ -1539,6 +1544,10 @@ footer {
     display: flex
   }
 
+  nav.scrolled {
+    padding: 1.1rem 2rem
+  }
+
   .hero {
     padding: 7rem 2rem 4rem;
     min-height: 0
@@ -1666,8 +1675,12 @@ footer {
     padding: 1rem 1.25rem
   }
 
+  nav.scrolled {
+    padding: .8rem 1.25rem
+  }
+
   .hero {
-    padding: 6rem 1.25rem 3.5rem
+    padding: 4.5rem 1.25rem 3.5rem
   }
 
   .hero-h1 {
@@ -1683,7 +1696,9 @@ footer {
   .hero-actions {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.2rem
+    justify-content: flex-start;
+    gap: 2.5rem;
+    width: 100%
   }
 
   .btn-primary {
