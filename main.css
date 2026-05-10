@@ -22,7 +22,8 @@
 }
 
 html {
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
+  font-size: 106%
 }
 
 body {
@@ -43,6 +44,18 @@ body::before {
   background-size: 200px 200px
 }
 
+.global-grid {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.5;
+}
+
+
 nav {
   position: fixed;
   top: 0;
@@ -59,8 +72,8 @@ nav {
 nav.scrolled {
   padding: 1.1rem 6rem;
   background: rgba(253, 250, 244, .88);
-  backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
   border-bottom: 1px solid var(--border)
 }
 
@@ -184,27 +197,26 @@ nav.scrolled {
   }
 }
 
-.hero-lines {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 80px 80px;
-  opacity: .5
-}
 
-.hero-corner {
+.hero-corner,
+.deco-corner {
   position: absolute;
   width: 280px;
   height: 280px;
-  top: 8rem;
-  right: 5rem;
   border: 1px solid var(--border2);
   border-radius: 50%;
   animation: spinSlow 25s linear infinite;
-  pointer-events: none
+  pointer-events: none;
+  z-index: 1;
 }
 
-.hero-corner::before {
+.hero-corner {
+  top: 8rem;
+  right: 5rem;
+}
+
+.hero-corner::before,
+.deco-corner::before {
   content: '';
   position: absolute;
   inset: 30px;
@@ -212,12 +224,25 @@ nav.scrolled {
   border-radius: 50%
 }
 
-.hero-corner::after {
+.hero-corner::after,
+.deco-corner::after {
   content: '';
   position: absolute;
   inset: 60px;
   border: 1px dashed var(--border);
   border-radius: 50%
+}
+
+.services-corner {
+  top: 10rem;
+  left: -140px;
+  opacity: 0.4;
+}
+
+.contact-corner {
+  bottom: 5rem;
+  right: -100px;
+  opacity: 0.3;
 }
 
 .hero-left {
@@ -424,10 +449,16 @@ nav.scrolled {
 }
 
 .marquee-wrap {
+  width: 100%;
+  margin: 0;
   overflow: hidden;
   padding: 1.4rem 0;
   background: var(--ink);
-  position: relative
+  position: relative;
+  z-index: 10;
+  perspective: 1000px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .marquee-wrap::before,
@@ -453,8 +484,13 @@ nav.scrolled {
 
 .marquee-track {
   display: flex;
+  width: max-content;
   animation: marqueeSroll 22s linear infinite;
-  white-space: nowrap
+  white-space: nowrap;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .m-item {
@@ -475,18 +511,20 @@ nav.scrolled {
 
 @keyframes marqueeSroll {
   from {
-    transform: translateX(0)
+    transform: translate3d(0, 0, 0)
   }
 
   to {
-    transform: translateX(-50%)
+    transform: translate3d(-50%, 0, 0)
   }
 }
 
 #services {
   padding: 10rem 6rem;
   background: var(--cream);
-  position: relative
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
 }
 
 #services::before {
@@ -508,12 +546,12 @@ nav.scrolled {
 }
 
 .s-label {
-  font-size: .65rem;
+  font-size: .8rem;
   font-weight: 500;
   letter-spacing: .4em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 1.2rem;
+  margin-bottom: 2rem;
   display: block
 }
 
@@ -537,12 +575,11 @@ nav.scrolled {
 }
 
 .srv-header-right {
-  font-size: .92rem;
+  font-size: 1.1rem;
   font-weight: 300;
-  line-height: 2;
   color: var(--muted);
-  align-self: end;
-  padding-bottom: .4rem
+  line-height: 1.8;
+  max-width: 600px
 }
 
 .svc-grid {
@@ -707,6 +744,7 @@ nav.scrolled {
   gap: 8rem;
   align-items: center;
   position: relative;
+  z-index: 10;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border)
 }
@@ -863,16 +901,17 @@ nav.scrolled {
 }
 
 .proc-desc {
-  font-size: .82rem;
+  font-size: 1rem;
   font-weight: 300;
   color: var(--muted);
-  line-height: 1.9
+  line-height: 1.8
 }
 
 .quote-section {
   background: var(--ink);
   padding: 0;
   position: relative;
+  z-index: 10;
   overflow: hidden
 }
 
@@ -890,7 +929,8 @@ nav.scrolled {
   font-family: 'Playfair Display', serif;
   font-size: 14rem;
   font-weight: 900;
-  color: rgba(184, 135, 42, .06);
+  color: var(--gold);
+  opacity: 0.1;
   line-height: .8;
   -webkit-user-select: none;
   user-select: none;
@@ -929,7 +969,9 @@ nav.scrolled {
 #contact {
   padding: 10rem 6rem;
   background: var(--cream);
-  position: relative
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
 }
 
 #contact::before {
@@ -944,9 +986,11 @@ nav.scrolled {
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10rem;
-  align-items: start
+  grid-template-columns: .8fr 1.2fr;
+  gap: 8rem;
+  align-items: start;
+  position: relative;
+  z-index: 5
 }
 
 .cta-left .cta-label {
@@ -1063,28 +1107,28 @@ nav.scrolled {
 
 .f-group label {
   display: block;
-  font-size: .63rem;
+  font-size: .75rem;
   font-weight: 500;
   letter-spacing: .24em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: .5rem
+  margin-bottom: .8rem
 }
 
 .f-group input,
 .f-group textarea,
 .f-group select {
   width: 100%;
-  padding: .95rem 1.1rem;
+  padding: 1.2rem 1.4rem;
   background: var(--cream);
   border: 1px solid var(--border2);
   font-family: 'DM Sans', sans-serif;
-  font-size: .88rem;
+  font-size: 1rem;
   font-weight: 300;
   color: var(--ink);
   outline: none;
-  transition: all .3s;
-  border-radius: 0;
+  transition: all .35s;
+  border-radius: 4px;
   appearance: none
 }
 
@@ -1109,7 +1153,9 @@ nav.scrolled {
 }
 
 .f-group select {
-  background: var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23B8872A'/%3E%3C/svg%3E") no-repeat right 1.1rem center
+  background: var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23B8872A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 1.4rem center;
+  background-size: 1.2rem;
+  cursor: pointer
 }
 
 .f-group select:focus {
