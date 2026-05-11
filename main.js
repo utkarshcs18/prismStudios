@@ -35,7 +35,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-window.addEventListener('load', () => {
+window.addEventListener('DOMContentLoaded', () => {
   document.body.style.opacity = '1';
   if (typeof CONFIG !== 'undefined') {
     emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
