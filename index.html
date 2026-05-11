@@ -468,8 +468,13 @@
                 <option>Other</option>
               </select>
             </div>
-            <div class="f-group"><label>Tell Us About Your Project</label><textarea id="f-msg"
-                placeholder="Describe your brand and what you'd like to achieve..."></textarea></div>
+            <div class="f-group">
+              <div class="f-label-row">
+                <label>Tell Us About Your Project</label>
+                <button type="button" class="template-btn" onclick="applyTemplate()">Quick Template</button>
+              </div>
+              <textarea id="f-msg" placeholder="Describe your brand and what you'd like to achieve..."></textarea>
+            </div>
             <button type="button" class="f-btn" onclick="sendMsg()">
               Send Message
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

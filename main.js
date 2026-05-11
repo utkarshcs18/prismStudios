@@ -61,6 +61,23 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal, .rl, .rr').forEach(el => ro.observe(el));
 
+function applyTemplate() {
+  const msgField = document.getElementById('f-msg');
+  const template = `Project Overview: 
+- What do you do?
+- What are your main goals?
+- Any specific timeline?
+
+Desired Services:
+- [ ] Web Development
+- [ ] Video Production
+- [ ] Social Media Management
+- [ ] Other: `;
+  
+  msgField.value = template;
+  msgField.focus();
+}
+
 function sendMsg() {
   const btn = document.querySelector('.f-btn');
   const btnText = btn.firstChild;
@@ -94,12 +111,13 @@ function sendMsg() {
 
   emailjs.send(serviceId, templateId, templateParams)
     .then(function(response) {
-      console.log('SUCCESS!', response.status, response.text);
+      console.log('FLARE | SUCCESS!', response.status, response.text);
       document.getElementById('contactForm').style.display = 'none';
       document.getElementById('formSuccess').style.display = 'block';
     }, function(error) {
-      console.log('FAILED...', error);
+      console.log('FLARE | FAILED...', error);
       alert('Failed to send message. Please try again or email us directly.');
       btn.disabled = false;
       btnText.textContent = originalText;
-    });}
+    });
+}
