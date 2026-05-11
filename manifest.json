@@ -1,0 +1,16 @@
+{
+  "name": "Flare Studios",
+  "short_name": "Flare",
+  "description": "Flare Studios is a premier creative agency specializing in stunning websites, cinematic video production, and social media growth.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#D4A840",
+  "icons": [
+    {
+      "src": "flareStudio.jpeg",
+      "sizes": "any",
+      "type": "image/jpeg"
+    }
+  ]
+}

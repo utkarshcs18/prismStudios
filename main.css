@@ -1031,7 +1031,7 @@ nav.scrolled {
   font-size: .7rem;
   letter-spacing: .3em;
   text-transform: uppercase;
-  color: rgba(246, 82, 126, 0.9);
+  color: var(--gold);
   ;
 }
 
