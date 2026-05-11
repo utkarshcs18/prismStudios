@@ -37,6 +37,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 window.addEventListener('load', () => {
   document.body.style.opacity = '1';
+  if (typeof CONFIG !== 'undefined') {
+    emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
+  }
 });
 
 const mainNav = document.getElementById('mainNav');
@@ -125,6 +128,12 @@ function sendMsg() {
     return;
   }
 
+  if (typeof CONFIG === 'undefined' || !CONFIG.EMAILJS_SERVICE_ID || !CONFIG.EMAILJS_TEMPLATE_ID) {
+    console.error('FLARE | ERROR: EmailJS configuration (config.js) is missing or incomplete.');
+    alert('Contact form is currently offline. Please email team.flarestudios@gmail.com directly.');
+    return;
+  }
+
   const originalText = btnText.textContent;
   btn.disabled = true;
   btnText.textContent = 'Sending... ';
@@ -138,10 +147,7 @@ function sendMsg() {
     to_name: "Flare.studios"
   };
 
-  const serviceId = typeof CONFIG !== 'undefined' ? CONFIG.EMAILJS_SERVICE_ID : "";
-  const templateId = typeof CONFIG !== 'undefined' ? CONFIG.EMAILJS_TEMPLATE_ID : "";
-
-  emailjs.send(serviceId, templateId, templateParams)
+  emailjs.send(CONFIG.EMAILJS_SERVICE_ID, CONFIG.EMAILJS_TEMPLATE_ID, templateParams)
     .then(function (response) {
       console.log('FLARE | SUCCESS!', response.status, response.text);
       document.getElementById('contactForm').style.display = 'none';
