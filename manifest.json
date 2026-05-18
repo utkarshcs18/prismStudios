@@ -8,9 +8,9 @@
   "theme_color": "#D4A840",
   "icons": [
     {
-      "src": "prismStudios.jpeg",
+      "src": "prism.png",
       "sizes": "any",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ]
 }
