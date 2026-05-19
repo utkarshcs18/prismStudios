@@ -1,7 +1,6 @@
 if (history.scrollRestoration) {
-  history.scrollRestoration = 'manual';
+  history.scrollRestoration = 'auto';
 }
-window.scrollTo(0, 0);
 
 if (window.location.hash) {
   history.replaceState("", document.title, window.location.pathname + window.location.search);
@@ -40,6 +39,14 @@ window.addEventListener('DOMContentLoaded', () => {
   if (typeof CONFIG !== 'undefined') {
     emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
   }
+
+
+  requestAnimationFrame(() => {
+    lenis.scrollTo(0, { 
+      duration: 1.5, 
+      easing: (t) => 1 - Math.pow(1 - t, 4) 
+    });
+  });
 });
 
 const mainNav = document.getElementById('mainNav');
