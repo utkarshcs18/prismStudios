@@ -584,13 +584,17 @@ nav.scrolled {
   backface-visibility: hidden;
 }
 
+.marquee-wrap:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 .m-item {
   font-family: 'Cormorant', serif;
   font-size: 1rem;
   font-weight: 300;
   letter-spacing: .3em;
   text-transform: uppercase;
-  color: rgba(253, 250, 244, .45);
+  color: white;
   padding: 0 2rem;
 }
 
@@ -786,7 +790,7 @@ nav.scrolled {
 .svc-card:hover .pill {
   background: var(--gold-pale);
   border-color: var(--gold);
-  color: var(--gold);
+  color: black;
 }
 
 .svc-visual {
