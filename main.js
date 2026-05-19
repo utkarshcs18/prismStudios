@@ -34,25 +34,32 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+let isAutoScrolling = true;
+
 window.addEventListener('DOMContentLoaded', () => {
   document.body.style.opacity = '1';
   if (typeof CONFIG !== 'undefined') {
     emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
   }
 
-
   requestAnimationFrame(() => {
     lenis.scrollTo(0, { 
       duration: 1.5, 
       easing: (t) => 1 - Math.pow(1 - t, 4) 
     });
+    setTimeout(() => {
+      isAutoScrolling = false;
+      mainNav.classList.toggle('scrolled', window.scrollY > 60);
+    }, 1500);
   });
 });
 
 const mainNav = document.getElementById('mainNav');
 
 window.addEventListener('scroll', () => {
-  mainNav.classList.toggle('scrolled', scrollY > 60);
+  if (!isAutoScrolling) {
+    mainNav.classList.toggle('scrolled', window.scrollY > 60);
+  }
 }, { passive: true });
 
 const hamburger = document.getElementById('hamburger');
