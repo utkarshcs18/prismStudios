@@ -68,12 +68,19 @@ const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open', open);
+
+  if (open) {
+    lenis.stop();
+  } else {
+    lenis.start();
+  }
 });
 
 document.querySelectorAll('.mob-link').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
+    lenis.start();
   });
 });
 
