@@ -1381,12 +1381,16 @@ footer {
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   cursor: pointer;
-  padding: 4px;
+  width: 48px;
+  height: 48px;
   background: none;
   border: none;
   z-index: 600;
+  padding: 0;
 }
 
 .hamburger span {

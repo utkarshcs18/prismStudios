@@ -6,27 +6,43 @@ if (window.location.hash) {
   history.replaceState("", document.title, window.location.pathname + window.location.search);
 }
 
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-  wheelMultiplier: 1,
-  touchMultiplier: 2,
-  infinite: false,
-});
+let lenis = null;
+if (typeof Lenis !== 'undefined') {
+  lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+    infinite: false,
+  });
 
-function raf(time) {
-  lenis.raf(time);
+  function raf(time) {
+    if (lenis) lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
   requestAnimationFrame(raf);
 }
-
-requestAnimationFrame(raf);
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
     const target = this.getAttribute('href');
-    lenis.scrollTo(target);
+
+    if (this.classList.contains('mob-link')) {
+      if (lenis) lenis.start();
+      if (typeof hamburger !== 'undefined' && hamburger) hamburger.classList.remove('open');
+      if (typeof mobileMenu !== 'undefined' && mobileMenu) mobileMenu.classList.remove('open');
+    }
+
+    const targetEl = document.querySelector(target);
+    if (targetEl) {
+      if (lenis) {
+        lenis.scrollTo(targetEl);
+      } else {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
 
     setTimeout(() => {
       history.replaceState("", document.title, window.location.pathname + window.location.search);
@@ -38,18 +54,24 @@ let isAutoScrolling = true;
 
 window.addEventListener('DOMContentLoaded', () => {
   document.body.style.opacity = '1';
-  if (typeof CONFIG !== 'undefined') {
+  if (typeof CONFIG !== 'undefined' && typeof emailjs !== 'undefined') {
     emailjs.init(CONFIG.EMAILJS_PUBLIC_KEY);
   }
 
   requestAnimationFrame(() => {
-    lenis.scrollTo(0, { 
-      duration: 1.5, 
-      easing: (t) => 1 - Math.pow(1 - t, 4) 
-    });
+    if (lenis) {
+      lenis.scrollTo(0, { 
+        duration: 1.5, 
+        easing: (t) => 1 - Math.pow(1 - t, 4) 
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
     setTimeout(() => {
       isAutoScrolling = false;
-      mainNav.classList.toggle('scrolled', window.scrollY > 60);
+      if (typeof mainNav !== 'undefined' && mainNav) {
+        mainNav.classList.toggle('scrolled', window.scrollY > 60);
+      }
     }, 1500);
   });
 });
@@ -76,13 +98,6 @@ hamburger.addEventListener('click', () => {
   }
 });
 
-document.querySelectorAll('.mob-link').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    lenis.start();
-  });
-});
 
 const sections = ['services', 'process', 'contact'];
 const navLinks = document.querySelectorAll('.nav-links a[data-section], .mob-link[data-section]');
