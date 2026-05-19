@@ -25,7 +25,8 @@ html {
   font-size: 106%;
 }
 
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -1118,6 +1119,7 @@ nav.scrolled {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+  align-items: flex-start;
 }
 
 .cta-link-row {
