@@ -68,24 +68,12 @@ const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open', open);
-
-  if (open) {
-    const sbw = window.innerWidth - document.documentElement.clientWidth;
-    document.body.style.paddingRight = `${sbw}px`;
-    mainNav.style.paddingRight = `${sbw}px`;
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.paddingRight = '';
-    mainNav.style.paddingRight = '';
-    document.body.style.overflow = '';
-  }
 });
 
 document.querySelectorAll('.mob-link').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
   });
 });
 
