@@ -105,6 +105,15 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal, .rl, .rr').forEach(el => ro.observe(el));
 
+let _toastTimer = null;
+function showToast(msg) {
+  const toast = document.getElementById('prismToast');
+  document.getElementById('prismToastMsg').textContent = msg;
+  toast.classList.add('show');
+  if (_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
 function applyTemplate() {
   const msgField = document.getElementById('f-msg');
   const template = `Project Overview: 
@@ -126,14 +135,14 @@ function sendMsg() {
   const industry = document.getElementById('f-industry').value;
   const msg = document.getElementById('f-msg').value.trim();
 
-  if (!name || !email) {
-    alert('Please fill in your name and email.');
+  if (!name || !email || !msg) {
+    showToast('Please fill in your name, email, and project details.');
     return;
   }
 
   if (typeof CONFIG === 'undefined' || !CONFIG.EMAILJS_SERVICE_ID || !CONFIG.EMAILJS_TEMPLATE_ID) {
     console.error('PRISM | ERROR: EmailJS configuration (config.js) is missing or incomplete.');
-    alert('Contact form is currently offline. Please email work.prismstudios@gmail.com directly.');
+    showToast('Contact form is currently offline. Please email work.prismstudios@gmail.com directly.');
     return;
   }
 
@@ -157,7 +166,7 @@ function sendMsg() {
       document.getElementById('formSuccess').style.display = 'block';
     }, function (error) {
       console.log('PRISM | FAILED...', error);
-      alert('Failed to send message. Please try again or email us directly.');
+      showToast('Failed to send message. Please try again or email us directly.');
       btn.disabled = false;
       btnText.textContent = originalText;
     });
