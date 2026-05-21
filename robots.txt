@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://prismstudios.vercel.app/sitemap.xml
+Sitemap: https://prismstudios.online/sitemap.xml
