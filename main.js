@@ -134,7 +134,9 @@ function applyTemplate() {
   const template = `Project Overview: 
 - What do you do?
 - What are your main goals?
-- Any specific timeline?`;
+- Breif about project?
+- Any specific timeline?
+`;
 
   msgField.value = template;
   msgField.focus();
