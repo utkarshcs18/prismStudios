@@ -795,12 +795,12 @@ nav.scrolled {
 }
 
 .svc-visual {
-  padding: 2rem 2.5rem;
+  padding: 0.5rem 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-left: 1px solid var(--border);
-  min-width: 220px;
+  min-width: 320px;
   background: var(--cream2);
   transition: background .4s;
 }
@@ -809,12 +809,19 @@ nav.scrolled {
   background: var(--gold-pale);
 }
 
-.svc-visual svg {
+.svc-visual svg,
+.svc-visual img {
   transition: transform .5s cubic-bezier(.16, 1, .3, 1);
   filter: drop-shadow(0 8px 20px rgba(184, 135, 42, .1));
+  object-fit: contain;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
 }
 
-.svc-card:hover .svc-visual svg {
+.svc-card:hover .svc-visual svg,
+.svc-card:hover .svc-visual img {
   transform: scale(1.04);
 }
 
