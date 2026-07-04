@@ -345,8 +345,8 @@
             <div class="f-row">
               <div class="f-group"><label>Your Name</label><input type="text" name="name" id="f-name"
                   placeholder="Rahul" required></div>
-              <div class="f-group"><label>Phone</label><input type="tel" name="phone" id="f-phone"
-                  placeholder="+91 98989 89898"></div>
+              <div class="f-group"><label>Phone</label><input type="tel" name="phone" id="f-phone" maxlength="10"
+                   pattern="[0-9]{10}" inputmode="numeric" placeholder="+91 98989 89898"></div>
             </div>
             <div class="f-group"><label>Email Address</label><input type="email" name="email" id="f-email"
                 placeholder="you@company.com" required></div>

@@ -31,7 +31,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     if (this.classList.contains('mob-link')) {
       if (lenis) lenis.start();
-      if (typeof hamburger !== 'undefined' && hamburger) hamburger.classList.remove('open');
+      if (typeof hamburger !== 'undefined' && hamburger) {
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
       if (typeof mobileMenu !== 'undefined' && mobileMenu) mobileMenu.classList.remove('open');
     }
 
@@ -60,9 +63,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   requestAnimationFrame(() => {
     if (lenis) {
-      lenis.scrollTo(0, { 
-        duration: 1.5, 
-        easing: (t) => 1 - Math.pow(1 - t, 4) 
+      lenis.scrollTo(0, {
+        duration: 1.5,
+        easing: (t) => 1 - Math.pow(1 - t, 4)
       });
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -90,11 +93,14 @@ const mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', () => {
   const open = hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
 
-  if (open) {
-    lenis.stop();
-  } else {
-    lenis.start();
+  if (lenis) {
+    if (open) {
+      lenis.stop();
+    } else {
+      lenis.start();
+    }
   }
 });
 
@@ -131,10 +137,10 @@ function showToast(msg) {
 
 function applyTemplate() {
   const msgField = document.getElementById('f-msg');
-  const template = `Project Overview: 
+  const template = `Project Overview:
 - What do you do?
 - What are your main goals?
-- Breif about project?
+- Brief about project?
 - Any specific timeline?
 `;
 
@@ -142,7 +148,9 @@ function applyTemplate() {
   msgField.focus();
 }
 
-function sendMsg() {
+function sendMsg(event) {
+  if (event) event.preventDefault();
+
   const btn = document.querySelector('.f-btn');
   const btnText = btn.firstChild;
 
@@ -154,13 +162,24 @@ function sendMsg() {
 
   if (!name || !email || !msg) {
     showToast('Please fill in your name, email, and project details.');
-    return;
+    return false;
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    showToast('Please enter a valid email address.');
+    return false;
+  }
+
+  if (phone && !/^[0-9]{10}$/.test(phone)) {
+    showToast('Please enter a valid 10-digit phone number.');
+    return false;
   }
 
   if (typeof CONFIG === 'undefined' || !CONFIG.EMAILJS_SERVICE_ID || !CONFIG.EMAILJS_TEMPLATE_ID) {
     console.error('PRISM | ERROR: EmailJS configuration (config.js) is missing or incomplete.');
     showToast('Contact form is currently offline. Please email work.prismstudios@gmail.com directly.');
-    return;
+    return false;
   }
 
   const originalText = btnText.textContent;
@@ -187,4 +206,6 @@ function sendMsg() {
       btn.disabled = false;
       btnText.textContent = originalText;
     });
+
+  return false;
 }
